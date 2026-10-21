@@ -1,0 +1,170 @@
+[
+    {
+        "id": 1,
+        "name": "Aaron Smith-Dancin-Krono Remix. Luvli",
+        "src": "music/general/Aaron Smith-Dancin-Krono Remix. Luvli.mp3",
+        "category": "general",
+        "fav": false,
+        "color": "#38bdf8"
+    },
+    {
+        "id": 2,
+        "name": "Camila Cabello-Havana",
+        "src": "music/general/Camila Cabello-Havana.mp3",
+        "category": "general",
+        "fav": false,
+        "color": "#38bdf8"
+    },
+    {
+        "id": 3,
+        "name": "Ed Sheeran - Perfect",
+        "src": "music/general/Ed Sheeran - Perfect.mp3",
+        "category": "general",
+        "fav": false,
+        "color": "#38bdf8"
+    },
+    {
+        "id": 4,
+        "name": "Issam Alnajjar-Hadal Ahbek",
+        "src": "music/general/Issam Alnajjar-Hadal Ahbek.mp3",
+        "category": "general",
+        "fav": false,
+        "color": "#38bdf8"
+    },
+    {
+        "id": 5,
+        "name": "Lana Del Rey-Summertime Sadness",
+        "src": "music/general/Lana Del Rey-Summertime Sadness.mp3",
+        "category": "general",
+        "fav": false,
+        "color": "#38bdf8"
+    },
+    {
+        "id": 6,
+        "name": "Round and Round",
+        "src": "music/general/Round and Round.mp3",
+        "category": "general",
+        "fav": false,
+        "color": "#38bdf8"
+    },
+    {
+        "id": 7,
+        "name": "sombr - 12 to 12",
+        "src": "music/smbr/sombr - 12 to 12.mp3",
+        "category": "smbr",
+        "fav": false,
+        "color": "#38bdf8"
+    },
+    {
+        "id": 8,
+        "name": "sombr - back to friends",
+        "src": "music/smbr/sombr - back to friends.mp3",
+        "category": "smbr",
+        "fav": false,
+        "color": "#38bdf8"
+    },
+    {
+        "id": 9,
+        "name": "sombr - undressed",
+        "src": "music/smbr/sombr - undressed.mp3",
+        "category": "smbr",
+        "fav": false,
+        "color": "#38bdf8"
+    },
+    {
+        "id": 10,
+        "name": "Taylor Swift - Bad Blood ft. Kendrick Lamar",
+        "src": "music/tylor swift/Taylor Swift - Bad Blood ft. Kendrick Lamar.mp3",
+        "category": "tylor swift",
+        "fav": false,
+        "color": "#38bdf8"
+    },
+    {
+        "id": 11,
+        "name": "Taylor Swift - Blank Space",
+        "src": "music/tylor swift/Taylor Swift - Blank Space.mp3",
+        "category": "tylor swift",
+        "fav": false,
+        "color": "#38bdf8"
+    },
+    {
+        "id": 12,
+        "name": "Taylor Swift - I Knew You Were Trouble",
+        "src": "music/tylor swift/Taylor Swift - I Knew You Were Trouble.mp3",
+        "category": "tylor swift",
+        "fav": false,
+        "color": "#38bdf8"
+    },
+    {
+        "id": 13,
+        "name": "Taylor Swift - Look What You Made Me Do",
+        "src": "music/tylor swift/Taylor Swift - Look What You Made Me Do.mp3",
+        "category": "tylor swift",
+        "fav": false,
+        "color": "#38bdf8"
+    },
+    {
+        "id": 14,
+        "name": "Taylor Swift - Love Story",
+        "src": "music/tylor swift/Taylor Swift - Love Story.mp3",
+        "category": "tylor swift",
+        "fav": false,
+        "color": "#38bdf8"
+    },
+    {
+        "id": 15,
+        "name": "Taylor Swift - Shake It Off",
+        "src": "music/tylor swift/Taylor Swift - Shake It Off.mp3",
+        "category": "tylor swift",
+        "fav": false,
+        "color": "#38bdf8"
+    },
+    {
+        "id": 16,
+        "name": "Taylor Swift - Style",
+        "src": "music/tylor swift/Taylor Swift - Style.mp3",
+        "category": "tylor swift",
+        "fav": false,
+        "color": "#38bdf8"
+    },
+    {
+        "id": 17,
+        "name": "Taylor Swift - We Are Never Ever Getting Back Together",
+        "src": "music/tylor swift/Taylor Swift - We Are Never Ever Getting Back Together.mp3",
+        "category": "tylor swift",
+        "fav": false,
+        "color": "#38bdf8"
+    },
+    {
+        "id": 18,
+        "name": "Taylor Swift - Wildest Dreams",
+        "src": "music/tylor swift/Taylor Swift - Wildest Dreams.mp3",
+        "category": "tylor swift",
+        "fav": false,
+        "color": "#38bdf8"
+    },
+    {
+        "id": 19,
+        "name": "Taylor Swift - You Belong With Me",
+        "src": "music/tylor swift/Taylor Swift - You Belong With Me.mp3",
+        "category": "tylor swift",
+        "fav": false,
+        "color": "#38bdf8"
+    },
+    {
+        "id": 20,
+        "name": "Taylor Swift-The Fate of Ophelia",
+        "src": "music/tylor swift/Taylor Swift-The Fate of Ophelia.mp3",
+        "category": "tylor swift",
+        "fav": false,
+        "color": "#38bdf8"
+    },
+    {
+        "id": 21,
+        "name": "ZAYN Taylor Swift-I Don’t Wanna Live Forever",
+        "src": "music/tylor swift/ZAYN Taylor Swift-I Don’t Wanna Live Forever.mp3",
+        "category": "tylor swift",
+        "fav": false,
+        "color": "#38bdf8"
+    }
+]

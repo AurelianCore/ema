@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>استمتعي 💙🌌</title>
+    <link rel="manifest" href="manifest.json">
+    <style>
+        :root {
+            --bg-gradient: linear-gradient(135deg, #020617 0%, #0f172a 50%, #082f49 100%);
+            --card-glass: rgba(15, 23, 42, 0.8);
+            --card-hover: rgba(30, 41, 59, 0.9);
+            --accent-primary: #38bdf8;
+            --accent-glow: rgba(56, 189, 248, 0.35);
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --border-glow: rgba(56, 189, 248, 0.2);
+        }
+
+        * {
+            box-sizing: border-box;
+            user-select: none;
+            margin: 0;
+            padding: 0;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        html, body {
+            width: 100%;
+            max-width: 100%;
+            overflow-x: hidden;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: var(--bg-gradient);
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        header {
+            padding: 0.8rem 1rem;
+            background: rgba(2, 6, 23, 0.8);
+            backdrop-filter: blur(25px);
+            border-bottom: 1px solid var(--border-glow);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            width: 100%;
+        }
+
+        .brand {
+            font-size: 1.1rem;
+            font-weight: 800;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--text-main);
+        }
+
+        .brand-badge {
+            background: rgba(56, 189, 248, 0.15);
+            color: var(--accent-primary);
+            padding: 0.2rem 0.6rem;
+            border-radius: 15px;
+            font-size: 0.7rem;
+            border: 1px solid var(--border-glow);
+        }
+
+        .btn-upload-wrap {
+            background: linear-gradient(135deg, rgba(56, 189, 248, 0.2), rgba(14, 165, 233, 0.1));
+            border: 1px solid var(--border-glow);
+            color: var(--text-main);
+            padding: 0.4rem 0.8rem;
+            border-radius: 25px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        #file-upload { display: none; }
+
+        .app-container {
+            width: 100%;
+            max-width: 1000px;
+            margin: 1rem auto;
+            padding: 0 0.8rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1.2rem;
+        }
+
+        .player-card {
+            background: var(--card-glass);
+            backdrop-filter: blur(30px);
+            border: 1px solid var(--border-glow);
+            border-radius: 24px;
+            padding: 1.2rem 0.8rem;
+            text-align: center;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+            width: 100%;
+            overflow: hidden;
+        }
+
+        .album-art-box {
+            width: 120px;
+            height: 120px;
+            margin: 0 auto 1rem auto;
+        }
+
+        .album-disc {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background: radial-gradient(circle, #0284c7 0%, #0369a1 50%, #0f172a 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            box-shadow: 0 10px 25px var(--accent-glow);
+            border: 3px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .song-title {
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--text-main);
+            margin-bottom: 0.2rem;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            width: 100%;
+            padding: 0 0.5rem;
+            direction: ltr;
+        }
+
+        .artist-subtitle {
+            font-size: 0.78rem;
+            color: var(--text-muted);
+            margin-bottom: 1rem;
+        }
+
+        .extra-tools {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .tool-btn {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid var(--border-glow);
+            color: var(--text-muted);
+            padding: 0.35rem 0.75rem;
+            border-radius: 15px;
+            font-size: 0.72rem;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .tool-btn.active { background: var(--accent-primary); color: #020617; }
+
+        .progress-section { margin-bottom: 1rem; }
+        
+        .progress-row {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0 0.4rem;
+        }
+
+        .time-badge { font-size: 0.72rem; font-weight: 600; color: var(--text-muted); min-width: 30px; }
+
+        .custom-slider {
+            flex-grow: 1; -webkit-appearance: none; appearance: none; height: 5px; border-radius: 10px; background: rgba(255, 255, 255, 0.08); outline: none;
+        }
+
+        .custom-slider::-webkit-slider-thumb {
+            -webkit-appearance: none; appearance: none; width: 12px; height: 12px; border-radius: 50%; background: var(--accent-primary); box-shadow: 0 0 10px var(--accent-primary);
+        }
+
+        .action-btns {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.4rem;
+            margin-bottom: 1rem;
+        }
+
+        .btn-action {
+            background: transparent; border: none; color: var(--text-muted); font-size: 1.05rem; width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer;
+        }
+
+        .btn-play-main {
+            background: var(--accent-primary) !important; color: #020617 !important; width: 48px !important; height: 48px !important; font-size: 1.2rem !important; box-shadow: 0 8px 20px var(--accent-glow);
+        }
+
+        .volume-row { display: flex; align-items: center; gap: 0.5rem; width: 80%; margin: 0 auto; }
+
+        .playlist-card {
+            background: var(--card-glass);
+            backdrop-filter: blur(30px);
+            border: 1px solid var(--border-glow);
+            border-radius: 24px;
+            padding: 1rem;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .search-box-input {
+            width: 100%; padding: 0.75rem 1rem; background: rgba(2, 6, 23, 0.5); border: 1px solid var(--border-glow); border-radius: 14px; color: var(--text-main); font-size: 0.82rem; outline: none; margin-bottom: 0.8rem;
+        }
+
+        .category-tabs { 
+            display: flex; 
+            gap: 0.5rem; 
+            margin-bottom: 0.8rem; 
+            overflow-x: auto; 
+            padding-bottom: 0.3rem; 
+            white-space: nowrap; 
+            width: 100%;
+        }
+        
+        .category-tabs::-webkit-scrollbar { display: none; }
+
+        .tab-btn { 
+            background: rgba(255, 255, 255, 0.04); 
+            border: 1px solid var(--border-glow); 
+            color: var(--text-muted); 
+            padding: 0.38rem 0.85rem; 
+            border-radius: 20px; 
+            font-size: 0.75rem; 
+            font-weight: 600; 
+            cursor: pointer; 
+            flex-shrink: 0;
+        }
+        
+        .tab-btn.active { background: var(--accent-primary); color: #020617; border-color: var(--accent-primary); }
+
+        .song-items-list { 
+            max-height: 300px; 
+            overflow-y: auto; 
+            display: flex; 
+            flex-direction: column; 
+            gap: 0.4rem; 
+            width: 100%;
+        }
+
+        /* تعديل احترافي باستخدام Flexbox لمنع أي انبعاج وضبط النص الطويل داخل الكارت */
+        .song-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0.65rem 0.8rem;
+            border-radius: 14px;
+            cursor: pointer;
+            gap: 0.8rem;
+            background: rgba(255, 255, 255, 0.01);
+            width: 100%;
+            overflow: hidden;
+        }
+
+        .song-row.active { background: rgba(56, 189, 248, 0.12); border-right: 3px solid var(--accent-primary); }
+
+        .song-index { 
+            font-size: 0.75rem; 
+            color: var(--text-muted); 
+            font-weight: 600; 
+            min-width: 20px;
+            text-align: center;
+        }
+
+        .song-info {
+            flex-grow: 1;
+            min-width: 0;
+            overflow: hidden;
+            text-align: right;
+        }
+
+        .song-name-text { 
+            font-size: 0.82rem; 
+            font-weight: 600; 
+            color: var(--text-main); 
+            white-space: nowrap; 
+            overflow: hidden; 
+            text-overflow: ellipsis; 
+            direction: ltr; 
+            display: block;
+            width: 100%;
+        }
+
+        .btn-heart { 
+            background: none; 
+            border: none; 
+            color: var(--text-muted); 
+            cursor: pointer; 
+            font-size: 0.95rem; 
+            min-width: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        @media (min-width: 850px) {
+            .app-container {
+                display: grid;
+                grid-template-columns: 360px minmax(0, 1fr);
+                gap: 2rem;
+            }
+            .playlist-card { height: 500px; }
+            .song-items-list { max-height: 380px; }
+            .album-art-box { width: 160px; height: 160px; }
+        }
+
+        footer { text-align: center; padding: 1rem; font-size: 0.75rem; color: var(--text-muted); border-top: 1px solid var(--border-glow); background: rgba(2, 6, 23, 0.8); }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="brand">
+            <div class="brand-badge">Blue Serenade</div>
+           تستاهلين 💙
+        </div>
+        <label class="btn-upload-wrap">
+            <span>➕</span> إضافة
+            <input type="file" id="file-upload" accept="audio/*" multiple onchange="handleFileUpload(event)">
+        </label>
+    </header>
+
+    <div class="app-container">
+        
+        <div class="player-card" id="player-card">
+            <div class="album-art-box">
+                <div class="album-disc" id="art">🎧</div>
+            </div>
+
+            <div class="song-title" id="title">جاري التحميل...</div>
+            <div class="artist-subtitle" id="artist-subtitle">Dedicated Blue Edition</div>
+
+            <div class="extra-tools">
+                <button class="tool-btn" onclick="toggleLyrics()" title="كلمات الأغنية">🎤 كلمات</button>
+                <button class="tool-btn" id="timer-btn" onclick="setSleepTimer()" title="مؤقت النوم">💤 إيقاف</button>
+                <button class="tool-btn" id="speed-btn" onclick="changeSpeed()" title="سرعة التشغيل">🚀 1x</button>
+            </div>
+
+            <div class="progress-section">
+                <div class="progress-row">
+                    <span class="time-badge" id="current-time">0:00</span>
+                    <input type="range" class="custom-slider" id="progress" min="0" max="100" value="0" onchange="seekTo()">
+                    <span class="time-badge" id="duration">0:00</span>
+                </div>
+            </div>
+
+            <div class="action-btns">
+                <button class="btn-action" id="shuffle-btn" onclick="toggleShuffle()" title="عشوائي">🔀</button>
+                <button class="btn-action" onclick="seekRelative(-10)" title="تأخير 10 ثوان">⏪</button>
+                <button class="btn-action" onclick="prevTrack()" title="السابق">⏮</button>
+                <button class="btn-action btn-play-main" id="play-btn" onclick="playPause()" title="تشغيل / إيقاف">▶</button>
+                <button class="btn-action" onclick="nextTrack()" title="التالي">⏭</button>
+                <button class="btn-action" onclick="seekRelative(10)" title="تقديم 10 ثوان">⏩</button>
+                <button class="btn-action" id="repeat-btn" onclick="toggleRepeat()" title="تكرار">🔁</button>
+            </div>
+
+            <div class="volume-row">
+                <span id="mute-btn" onclick="toggleMute()" style="cursor:pointer; font-size: 0.85rem;">🔊</span>
+                <input type="range" class="custom-slider" id="volume" min="0" max="1" step="0.01" value="1" oninput="setVolume(this.value)">
+            </div>
+        </div>
+
+        <div class="playlist-card">
+            <input type="text" class="search-box-input" id="search-input" placeholder="🔍 ابحثي في الأغاني الهادئة..." oninput="filterPlaylist()">
+            
+            <div class="category-tabs" id="category-tabs">
+                <button class="tab-btn active" data-filter="all" onclick="setFilter('all')">الجميع 🎶</button>
+                <button class="tab-btn" data-filter="fav" onclick="setFilter('fav')">المفضلة 💙</button>
+            </div>
+
+            <div class="song-items-list" id="playlist-entries"></div>
+        </div>
+
+    </div>
+
+    <script>
+        let track_list = [];
+        let track_index = 0;
+        let isPlaying = false;
+        let isShuffle = false;
+        let isRepeat = false;
+        let currentFilter = 'all';
+        let curr_track = new Audio();
+        let updateTimer;
+        let sleepTimer;
+        let currentSpeed = 1;
+
+        const playbtn = document.getElementById('play-btn');
+        const progress = document.getElementById('progress');
+        const currTime = document.getElementById('current-time');
+        const totalDuration = document.getElementById('duration');
+        const trackTitle = document.getElementById('title');
+        const playerCard = document.getElementById('player-card');
+
+        async function fetchSongs() {
+            try {
+                const response = await fetch('songs.json');
+                track_list = await response.json();
+                if (track_list.length > 0) {
+                    renderCategoryTabs();
+                    loadTrack(track_index);
+                }
+            } catch (error) {
+                console.error("فشل تحميل ملف JSON:", error);
+                trackTitle.textContent = "خطأ في تحميل قائمة الأغاني";
+            }
+        }
+
+        function renderCategoryTabs() {
+            const tabsContainer = document.getElementById('category-tabs');
+            const categories = new Set();
+            track_list.forEach(t => { if(t.category) categories.add(t.category); });
+
+            tabsContainer.innerHTML = `
+                <button class="tab-btn ${currentFilter === 'all' ? 'active' : ''}" data-filter="all" onclick="setFilter('all')">الجميع 🎶</button>
+                <button class="tab-btn ${currentFilter === 'fav' ? 'active' : ''}" data-filter="fav" onclick="setFilter('fav')">المفضلة 💙</button>
+            `;
+
+            categories.forEach(cat => {
+                const btn = document.createElement('button');
+                btn.className = `tab-btn ${currentFilter === cat ? 'active' : ''}`;
+                btn.dataset.filter = cat;
+                btn.textContent = cat === 'tylor swift' ? 'Taylor Swift 🎤' : (cat === 'smbr' ? 'SMBR 🌙' : cat);
+                btn.onclick = () => setFilter(cat);
+                tabsContainer.appendChild(btn);
+            });
+        }
+
+        function buildPlaylist() {
+            const playlistEntries = document.getElementById('playlist-entries');
+            playlistEntries.innerHTML = '';
+            const searchVal = document.getElementById('search-input').value.toLowerCase();
+
+            track_list.forEach((track, index) => {
+                if (currentFilter === 'fav' && !track.fav) return;
+                if (currentFilter !== 'all' && currentFilter !== 'fav' && track.category !== currentFilter) return;
+                if (searchVal && !track.name.toLowerCase().includes(searchVal)) return;
+
+                const row = document.createElement('div');
+                row.classList.add('song-row');
+                if(index === track_index) row.classList.add('active');
+
+                row.innerHTML = `
+                    <span class="song-index">${index + 1}</span>
+                    <div class="song-info">
+                        <span class="song-name-text">${track.name}</span>
+                    </div>
+                    <button class="btn-heart ${track.fav ? 'active' : ''}" onclick="toggleFav(event, ${index})">💙</button>
+                `;
+
+                row.onclick = (e) => {
+                    if (e.target.classList.contains('btn-heart')) return;
+                    track_index = index;
+                    loadTrack(track_index);
+                    playTrack();
+                };
+                playlistEntries.appendChild(row);
+            });
+        }
+
+        function loadTrack(index) {
+            clearInterval(updateTimer);
+            resetValues();
+            const track = track_list[index];
+            
+            curr_track.src = encodeURI(track.src);
+            curr_track.load();
+            curr_track.playbackRate = currentSpeed;
+            
+            trackTitle.textContent = track.name;
+            document.getElementById('artist-subtitle').textContent = track.category ? `قسم: ${track.category}` : "Blue Serenade Edition";
+            
+            updateTimer = setInterval(seekUpdate, 1000);
+            buildPlaylist();
+        }
+
+        function resetValues() {
+            currTime.textContent = "0:00";
+            totalDuration.textContent = "0:00";
+            progress.value = 0;
+        }
+
+        function playPause() {
+            if (!isPlaying) playTrack();
+            else pauseTrack();
+        }
+
+        function playTrack() {
+            let playPromise = curr_track.play();
+            if (playPromise !== undefined) {
+                playPromise.then(() => {
+                    isPlaying = true;
+                    playbtn.textContent = "⏸";
+                }).catch(error => { console.log("Error:", error); });
+            }
+        }
+
+        function pauseTrack() {
+            curr_track.pause();
+            isPlaying = false;
+            playbtn.textContent = "▶";
+        }
+
+        function seekRelative(seconds) { curr_track.currentTime += seconds; }
+
+        function toggleShuffle() {
+            isShuffle = !isShuffle;
+            document.getElementById('shuffle-btn').classList.toggle('active', isShuffle);
+        }
+
+        function toggleRepeat() {
+            isRepeat = !isRepeat;
+            document.getElementById('repeat-btn').classList.toggle('active', isRepeat);
+        }
+
+        function nextTrack() {
+            if (isShuffle) { track_index = Math.floor(Math.random() * track_list.length); }
+            else { track_index = (track_index < track_list.length - 1) ? track_index + 1 : 0; }
+            loadTrack(track_index);
+            playTrack();
+        }
+
+        function prevTrack() {
+            track_index = (track_index > 0) ? track_index - 1 : track_list.length - 1;
+            loadTrack(track_index);
+            playTrack();
+        }
+
+        function toggleFav(e, index) {
+            e.stopPropagation();
+            track_list[index].fav = !track_list[index].fav;
+            buildPlaylist();
+        }
+
+        function setFilter(filter) {
+            currentFilter = filter;
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.classList.toggle('active', btn.dataset.filter === filter);
+            });
+            buildPlaylist();
+        }
+
+        function filterPlaylist() { buildPlaylist(); }
+
+        function setVolume(val) { curr_track.volume = val; }
+        function seekTo() { curr_track.currentTime = curr_track.duration * (progress.value / 100); }
+
+        function seekUpdate() {
+            if (!isNaN(curr_track.duration)) {
+                progress.value = curr_track.currentTime * (100 / curr_track.duration);
+                let cMin = Math.floor(curr_track.currentTime / 60), cSec = Math.floor(curr_track.currentTime % 60);
+                let dMin = Math.floor(curr_track.duration / 60), dSec = Math.floor(curr_track.duration % 60);
+                currTime.textContent = `${cMin}:${cSec < 10 ? '0' : ''}${cSec}`;
+                totalDuration.textContent = `${dMin}:${dSec < 10 ? '0' : ''}${dSec}`;
+            }
+        }
+
+        curr_track.addEventListener('ended', nextTrack);
+        fetchSongs();
+    </script>
+</body>
+</html>
