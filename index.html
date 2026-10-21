@@ -258,7 +258,6 @@
             width: 100%;
         }
 
-        /* تعديل احترافي باستخدام Flexbox لمنع أي انبعاج وضبط النص الطويل داخل الكارت */
         .song-row {
             display: flex;
             align-items: center;
@@ -489,6 +488,23 @@
             
             trackTitle.textContent = track.name;
             document.getElementById('artist-subtitle').textContent = track.category ? `قسم: ${track.category}` : "Blue Serenade Edition";
+            
+            // ضبط وتحديث بيانات إشعار أندرويد بالاسم الحقيقي للأغنية
+            if ('mediaSession' in navigator) {
+                navigator.mediaSession.metadata = new MediaMetadata({
+                    title: track.name,
+                    artist: track.category ? track.category : 'Blue Serenade',
+                    album: 'Aura Sound 💙',
+                    artwork: [
+                        { src: 'icon.png', sizes: '512x512', type: 'image/png' }
+                    ]
+                });
+
+                navigator.mediaSession.setActionHandler('play', playTrack);
+                navigator.mediaSession.setActionHandler('pause', pauseTrack);
+                navigator.mediaSession.setActionHandler('previoustrack', prevTrack);
+                navigator.mediaSession.setActionHandler('nexttrack', nextTrack);
+            }
             
             updateTimer = setInterval(seekUpdate, 1000);
             buildPlaylist();
